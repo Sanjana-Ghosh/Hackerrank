@@ -10,3 +10,10 @@ where f1.x = f2.y and f1.x <= f1.y)
 select distinct x1,y1 from cte where x1<y1 or (x1,y1) in (select x1,y1 from
 (select x1,y1,count(*) from cte where x1=y1 group by x1,y1 having count(*)>1))
 order by x1;
+
+
+Alternate sol:
+  
+select least(x,y),greatest(x,y) from functions
+group by least(x,y),greatest(x,y) having count(*)>1
+order by 1;
